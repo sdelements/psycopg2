@@ -475,7 +475,7 @@ include_dirs = []
 
 # gather information to build the extension module
 ext = []
-data_files = []
+data_files = [('/bin/', ['/usr/local/pgsql/bin/pg_dump'])]
 
 # sources
 
