@@ -475,6 +475,12 @@ include_dirs = []
 
 # gather information to build the extension module
 ext = []
+
+# This is a specific use case for SDELEMENTS.
+# Include pg_dump utility artifact in the final build package. This change
+# ensures that a pg_dump binary found on the build platform will be packaged
+# with the final distributable. If linked correctly with auditwheels, the
+# binary will be executable once installed.
 data_files = [('/bin/', ['/usr/local/pgsql/bin/pg_dump'])]
 
 # sources
