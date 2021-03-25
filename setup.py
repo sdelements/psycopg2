@@ -482,7 +482,7 @@ ext = []
 # with the final distributable. If linked correctly with auditwheels, the
 # binary will be executable once installed.
 pg_dump_path = subprocess.check_output(["which", "pg_dump"]).decode("utf-8").strip()
-data_files = [('bin/', [pg_dump_path])]
+data_files = [('/bin/', [pg_dump_path])]
 
 # sources
 
