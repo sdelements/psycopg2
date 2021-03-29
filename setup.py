@@ -48,7 +48,7 @@ except ImportError:
 # Take a look at https://www.python.org/dev/peps/pep-0440/
 # for a consistent versioning pattern.
 
-PSYCOPG_VERSION = '2.8.6'
+PSYCOPG_VERSION = '2.8.6.dev1'
 
 
 # note: if you are changing the list of supported Python version please fix
@@ -475,7 +475,14 @@ include_dirs = []
 
 # gather information to build the extension module
 ext = []
-data_files = []
+
+# This is a specific use case for SDELEMENTS.
+# Include pg_dump utility artifact in the final build package. This change
+# ensures that a pg_dump binary found on the build platform will be packaged
+# with the final distributable. If linked correctly with auditwheels, the
+# binary will be executable once installed.
+pg_dump_path = subprocess.check_output(["which", "pg_dump"]).decode("utf-8").strip()
+data_files = [('/bin/', [pg_dump_path])]
 
 # sources
 
