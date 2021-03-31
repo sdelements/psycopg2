@@ -481,8 +481,12 @@ ext = []
 # ensures that a pg_dump binary found on the build platform will be packaged
 # with the final distributable. If linked correctly with auditwheels, the
 # binary will be executable once installed.
-pg_dump_path = subprocess.check_output(["which", "pg_dump"]).decode("utf-8").strip()
-data_files = [('/bin/', [pg_dump_path])]
+try:
+    pg_dump_path = subprocess.check_output(["which", "pg_dump"]).decode("utf-8").strip()
+    data_files = [('/bin/', [pg_dump_path])]
+except subprocess.CalledProcessError:
+    print("Error when packaging pg_dump: ", sys.exc_info()[0])
+    data_files = []
 
 # sources
 
